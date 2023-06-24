@@ -1,38 +1,31 @@
 import './App.css';
-const bootstrap = require('bootstrap')
 
 function App() {
-  function handleLoop(val) {
-    let html = [];
-    for (let i = 0; i < val; i++) html.push(<tr>
-      <td>Nama {i}</td>
-      <td>File {i}</td>
-      <td>Ukuran {i}</td>
-      <td>Tanggal {i}</td>
-    </tr>)
-    return html;
+  function handleLogin(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.target.checkValidity()) {
+
+    } else {
+      alert("silahkan isi data");
+    }
   }
 
   return (
     <div className='container'>
-
-      <div className="table-responsive">
-        <table className='table table-stripped'>
-          <thead>
-            <tr>
-              <th>Nama</th>
-              <th>File</th>
-              <th>Ukuran</th>
-              <th>Tanggal</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              handleLoop(10)
-            }
-          </tbody>
-        </table>
-      </div>
+      <form onSubmit={(e) => handleLogin(e)} className="card shadow p-5 needs-validation" noValidate={true}>
+        <h3 className="text-center">Selamat Datang</h3>
+        <div className="form-group">
+          <label>Username</label>
+          <input type="text" className="form-control" placeholder="Masukan User Name" required />
+        </div>
+        <div className="form-group">
+          <label>Password</label>
+          <input type="password" className="form-control" placeholder="Masukan katasandi" required />
+        </div>
+        <p></p>
+        <button type="submit" className="btn btn-primary">Masuk</button>
+      </form>
     </div>
   );
 }
