@@ -1,23 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+const bootstrap = require('bootstrap')
 
 function App() {
+  function handleLoop(val) {
+    let html = [];
+    for (let i = 0; i < val; i++) html.push(<tr>
+      <td>Nama {i}</td>
+      <td>File {i}</td>
+      <td>Ukuran {i}</td>
+      <td>Tanggal {i}</td>
+    </tr>)
+    return html;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+
+      <div className="table-responsive">
+        <table className='table table-stripped'>
+          <thead>
+            <tr>
+              <th>Nama</th>
+              <th>File</th>
+              <th>Ukuran</th>
+              <th>Tanggal</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              handleLoop(10)
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
