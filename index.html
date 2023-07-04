@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            user-select: none;
+            transition: .2s all;
+        }
+
+        body {
+            padding-top: 77px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            padding: 20px;
+            background-color: #2196F3;
+            color: white;
+        }
+
+        header h1 {
+            float: left;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        header .material-icons {
+            float: right;
+            cursor: pointer;
+        }
+
+        header .icon-menu {
+            float: left;
+            margin-right: 20px;
+        }
+
+        .main {
+            padding: 20px 50px;
+        }
+
+        .folder * {
+            width: 100px;
+        }
+
+        .folder {
+            float: left;
+            width: 100px;
+            height: 152px;
+            padding: 20px;
+            margin-right: 50px;
+            margin-bottom: 70px;
+            border-radius: 2px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .folder:hover h1 {
+            display: none;
+        }
+
+        .folder:hover p.cooltip {
+            opacity: 1;
+            top: 0;
+        }
+
+        .folder * {
+            text-align: center;
+        }
+
+        .folder i {
+            margin: 0;
+            font-size: 100px;
+            color: #607D8B;
+        }
+
+        .folder h1 {
+            position: relative;
+            display: block;
+            top: -37px;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .folder p.cooltip {
+            position: relative;
+            top: 5px;
+            left: -50%;
+            margin-left: 35px;
+            background: #212121;
+            font-size: 15px;
+            color: white;
+            border-radius: 4px;
+            padding: 10px 20px;
+            padding-right: 30px;
+            width: 100px;
+            opacity: 0;
+        }
+
+        .folder p.cooltip:before {
+            content: '';
+            position: absolute;
+            display: block;
+            top: -4px;
+            left: 50%;
+            margin-left: -5px;
+            height: 10px;
+            width: 10px;
+            border-radius: 2px;
+            background-color: #212121;
+            transform: rotate(45deg);
+        }
+
+        div.properties {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 10;
+            width: 300px;
+            background-color: white;
+        }
+
+        div.properties:before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 300px;
+            bottom: 0;
+            background-color: #212121;
+            opacity: .5;
+            overflow: hidden;
+        }
+
+        div.properties img {
+            position: relative;
+            top: -1px;
+            left: -1px;
+            width: 110%;
+            height: 200px;
+            filter: blur(2px);
+        }
+
+        div.properties h1 {
+            position: relative;
+            width: 100%;
+            text-align: left;
+            margin-left: 20px;
+            color: white;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background-color: #2196F3;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        header h1 {
+            font-weight: 400;
+        }
+
+        header span {
+            flex: 1;
+            padding:10px;
+        }
+
+        header i {
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        header i:nth-child(1) {
+            margin: 0 20px;
+        }
+
+        /* Gaya dasar untuk input-group */
+        .input-group {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Gaya untuk input teks */
+        .input-group .input-text {
+            flex: 1;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        /* Gaya saat input teks mendapatkan fokus */
+        .input-group .input-text:focus {
+            color: #495057;
+            background-color: #fff;
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+        }
+
+        /* Gaya untuk elemen tambahan pada input-group */
+        .input-group .input-addon {
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            text-align: center;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+        }
+
+        /* Gaya untuk label yang terkait dengan input-group */
+        .input-group .input-label {
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+
+        /* Gaya dasar untuk tombol */
+        .btn {
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        /* Gaya untuk tombol primer (primary) */
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            color: #fff;
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+
+        .btn-primary:focus {
+            color: #fff;
+            background-color: #0069d9;
+            border-color: #0062cc;
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+        }
+
+        /* Gaya untuk tombol bahaya (danger) */
+        .btn-danger {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            color: #fff;
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        .btn-danger:focus {
+            color: #fff;
+            background-color: #c82333;
+            border-color: #bd2130;
+            box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5);
+        }
+
+        /* Gaya untuk tombol peringatan (warning) */
+        .btn-warning {
+            color: #212529;
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        .btn-warning:hover {
+            color: #212529;
+            background-color: #e0a800;
+            border-color: #d39e00;
+        }
+
+        .btn-warning:focus {
+            color: #212529;
+            background-color: #e0a800;
+            border-color: #d39e00;
+            box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <i>
+            <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="40">
+                <path d="M120-240v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
+            </svg>
+        </i>
+        <h1>Files</h1>
+        <span>
+            <div class="input-group">
+                <i onclick="handleBack()">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"><path d="M655-80 255-480l400-400 56 57-343 343 343 343-56 57Z"/></svg>
+                </i>
+                <input type="search" class="input-text" placeholder="Masukan Path" onchange="main()" value="/" id="edtPath" />
+            </div>
+        </span>
+        <i>
+            <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48">
+                <path d="M250-160q-86 0-148-62T40-370q0-78 49.5-137.5T217-579q20-97 94-158.5T482-799q113 0 189.5 81.5T748-522v24q72-2 122 46.5T920-329q0 69-50 119t-119 50H510q-24 0-42-18t-18-42v-258l-83 83-43-43 156-156 156 156-43 43-83-83v258h241q45 0 77-32t32-77q0-45-32-77t-77-32h-63v-84q0-89-60.5-153T478-739q-89 0-150 64t-61 153h-19q-62 0-105 43.5T100-371q0 62 43.929 106.5Q187.857-220 250-220h140v60H250Zm230-290Z"/>
+            </svg>
+        </i>
+        <i>
+            <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48">
+                <path d="M479.858-160Q460-160 446-174.142q-14-14.141-14-34Q432-228 446.142-242q14.141-14 34-14Q500-256 514-241.858q14 14.141 14 34Q528-188 513.858-174q-14.141 14-34 14Zm0-272Q460-432 446-446.142q-14-14.141-14-34Q432-500 446.142-514q14.141-14 34-14Q500-528 514-513.858q14 14.141 14 34Q528-460 513.858-446q-14.141 14-34 14Zm0-272Q460-704 446-718.142q-14-14.141-14-34Q432-772 446.142-786q14.141-14 34-14Q500-800 514-785.858q14 14.141 14 34Q528-732 513.858-718q-14.141 14-34 14Z"/>
+            </svg>
+        </i>
+    </header>
+    <div class="main" id="divMain"></div>
+    <script>
+         function rendElm(opt) {
+            let to = opt.to ? opt.to : "none";
+            let div = document.createElement("main");
+            for (let elm of opt.elm) {
+                let cElm = document.createElement(elm.elm);
+                Object.keys(elm).forEach(function (key) {
+                    if (key != "elm") {
+                        if (key == "text") {
+                            cElm.innerText = elm.text;
+                        } else if (key == "html") {
+                            cElm.innerHTML = elm.html;
+                        } else if (key == "cls") {
+                            cElm.className = elm[key];
+                        } else if (key == "attr") {
+                            for (let attr in elm.attr) cElm.setAttribute(attr, elm.attr[attr]);
+                        } else if (key == "selected") {
+                            if (elm.selected == true) cElm.setAttribute("selected", true);
+                        } else if (key == "checked") {
+                            if (elm.checked == true) cElm.setAttribute("checked", true);
+                        } else if (key == "style") {
+                            cElm.setAttribute("style", elm.style);
+                        } else if (key == "elms") {
+                            for (let Elm of elm.elms) {
+                                let ss = mm(Elm);
+                                cElm.appendChild(ss);
+                            }
+                        } else {
+                            cElm.setAttribute(key, elm[key]);
+                        }
+                    }
+                })
+                div.appendChild(cElm);
+            }
+
+            function mm(elms) {
+                let elm = document.createElement(elms.elm);
+                Object.keys(elms).forEach(function (key) {
+                    if (key != "elm") {
+                        if (key == "text") {
+                            elm.innerText = elms.text;
+                        } else if (key == "html") {
+                            elm.innerHTML = elms.html;
+                        } else if (key == "cls") {
+                            elm.className = elms[key];
+                        } else if (key == "attr") {
+                            for (let attr in elms.attr) elm.setAttribute(attr, elms.attr[attr]);
+                        } else if (key == "selected") {
+                            if (elms.selected == true) elm.setAttribute("selected", true);
+                        } else if (key == "checked") {
+                            if (elms.checked == true) elm.setAttribute("checked", true);
+                        } else if (key == "style") {
+                            elm.setAttribute("style", elms.style);
+                        } else if (key == "elms") {
+                            for (let Elm of elms.elms) {
+                                let ss = mm(Elm);
+                                elm.appendChild(ss);
+                            }
+                        } else {
+                            elm.setAttribute(key, elms[key]);
+                        }
+                    }
+                });
+                return elm;
+            }
+
+            if (to != "none") {
+                if (!opt.add) document.querySelectorAll(to)[0].innerHTML = "";
+                let hasil = div.outerHTML.replace("<main>", "");
+                let hasil2 = hasil.replace("</main>", "");
+                document.querySelectorAll(to)[0].innerHTML = hasil2;
+            } else {
+                let hasil = div.outerHTML.replace("<main>", "");
+                let hasil2 = hasil.replace("</main>", "");
+                return hasil2;
+            }
+        }
+
+        // fungsi untuk mengambil data dari server
+        function api(url, data = []) {
+            if (data.length == 0) {
+                return new Promise((resolve, reject) => {
+                    fetch(encodeURI(url))
+                        .then(response => response.text())
+                        .then(hasil => {
+                            console.log(hasil);
+                            if (isJson(hasil)) {
+                                resolve(JSON.parse(hasil));
+                            } else {
+                                resolve(hasil);
+                            }
+                        }).catch((error) => {
+                            reject({ status: "gagal", pesan: error });
+                        });
+                });
+            } else {
+                return new Promise((resolve, reject) => {
+                    fetch(encodeURI(url), {
+                        method: 'POST',
+                        body: jsonToForm(data),
+                    })
+                        .then(response => response.text())
+                        .then(hasil => {
+                            console.log(hasil);
+                            if (isJson(hasil)) {
+                                resolve(JSON.parse(hasil));
+                            } else {
+                                resolve(hasil);
+                            }
+                        }).catch((error) => {
+                            reject({ status: "gagal", pesan: error });
+                        });
+                });
+            }
+        }
+
+        // fungsi untuk merubah json ke formdata
+        function jsonToForm(data) {
+            const formData = new FormData();
+            for (let dt in data) {
+                formData.append(dt, data[dt]);
+            }
+            return formData;
+        }
+
+        function isJson(str) {
+            try {
+                JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            return true;
+        }
+
+        async function main() {
+            let search = document.getElementById('edtPath').value;
+            let sql = await api("/api", { act: "list_files", path: search.replaceAll("/", "-") });
+            if (sql.status == "sukses") {
+                let elm = [];
+                for (let item of sql.data) {
+                    if (item.Extension == "") {
+                        elm.push(
+                            {elm: "div", cls: "folder", onclick:`pilihFolder('${item.Name}')`, elms: [
+                                {elm: "i", elms: [
+                                    {elm: "svg", xmlns: "http://www.w3.org/2000/svg", height: "48", viewBox: "0 -960 960 960", width: "48", elms: [
+                                        { elm: "path", d: "M140-160q-24 0-42-18.5T80-220v-520q0-23 18-41.5t42-18.5h281l60 60h339q23 0 41.5 18.5T880-680v460q0 23-18.5 41.5T820-160H140Zm0-60h680v-460H456l-60-60H140v520Zm0 0v-520 520Z" }
+                                    ]},
+                                    { elm: "p", cls:"cooltip", text: `${item.FileCount} File` }
+                                ]},
+                                { elm: "h1", text: item.Name }
+                            ]}
+                        )
+                    } else {
+                        elm.push(
+                            {elm: "div", cls: "folder", onclick:`pilihFile('${item.Name}')`, elms: [
+                                {elm: "i", elms: [
+                                    {elm: "svg", xmlns: "http://www.w3.org/2000/svg", height: "48", viewBox: "0 -960 960 960", width: "48", elms: [
+                                            { elm: "path", d: "M180-820v295-4 389-680 186-186Zm99 400h168q12-17 26.5-32t31.5-28H279v60Zm0 170h123q-2-15-1.5-30t2.5-30H279v60ZM180-80q-24 0-42-18t-18-42v-680q0-24 18-42t42-18h361l219 219v155q-14-7-29-11.5t-31-7.5v-109H511v-186H180v680h260q11 17 24 32t28 28H180Zm475-389q80.51 0 137.255 56.745Q849-355.51 849-275q0 80.51-56.745 137.255Q735.51-81 655-81q-80.51 0-137.255-56.745Q461-194.49 461-275q0-80.51 56.745-137.255Q574.49-469 655-469Zm1.108 318Q668-151 676-159.108t8-20Q684-191 675.892-199t-20-8Q644-207 636-198.892t-8 20Q628-167 636.108-159t20 8ZM636-233h40v-10.952Q676-256 682.5-266q6.5-10 15.227-18.4Q713-297 722.5-309.5 732-322 732-342q0-31.719-21.297-50.859Q689.407-412 655.78-412 630-412 609-397.5t-29 39.986L616-342q2-14 13.5-23.5t26.948-9.5q16.552 0 26.052 8.25T692-342q0 11-7 19.5T670-306q-8 7-15.5 14T642-277q-4 7-5 13.3-1 6.3-1 14.7v16Z" }
+                                        ]},
+                                    { elm: "p", cls:"cooltip", text: item.Size }
+                                ]},
+                                { elm: "h1", text: item.Name }
+                            ]}
+                        )
+                    }
+                };
+
+                rendElm({ to: "#divMain", elm: elm });
+            }
+        }
+
+        function pilihFolder(Name){
+            let search = document.getElementById('edtPath');
+            search.value += "/" + Name;
+            main();
+        }
+
+        function pilihFile(Name){
+            let search = document.getElementById('edtPath').value;
+            search += "/" + Name;
+            let path = search.replaceAll("/", "-");
+            window.open("/file?path=" + search, '__blank');
+        }
+
+        function handleBack(){
+            let search = document.getElementById('edtPath').value;
+            var pathArray = search.split("/");
+            pathArray.pop();
+            var result = pathArray.join("/");
+            document.getElementById('edtPath').value = result;
+            main();
+        }
+
+        main();
+    </script>
+</body>
+
+</html>
